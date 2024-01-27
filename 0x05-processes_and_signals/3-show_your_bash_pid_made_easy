@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Bash script that display PID with process name etc
+# You cannot use ps
+
+pgrep -l bash

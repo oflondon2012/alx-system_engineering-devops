@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Bash script that kills the process 7-highlander
+
+for pd in $(pgrep -f 7-highlander)
+do
+	kill -9 "$pd"
+done

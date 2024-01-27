@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# bash script that displays infinity and beyond indefinitely
+# Note ctrl + c killed the bash script
+
+while (( 1 ))
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
