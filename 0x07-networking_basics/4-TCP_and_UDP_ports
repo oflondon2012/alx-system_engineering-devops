@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# bash script that display listeling port
+netstat -lp
