@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # bash script that listen on port 98 on locahost
-nc -lnp 98
+nc -l localhost 98
