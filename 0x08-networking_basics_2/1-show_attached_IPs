@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# bash script that displays all the active ips on the machine its executed on
+ifconfig | grep 'inet' | awk '{print $2}'
