@@ -7,7 +7,7 @@ file { 'etc/ssh/ssh_config':
 content =>"
 
 	#client configuration
-	host *
+	host*
 	#specify the file name as ~/0-RSA_public_key instead
 	IdentityFile ~/.ssh/school
 	PasswordAuthentication no
