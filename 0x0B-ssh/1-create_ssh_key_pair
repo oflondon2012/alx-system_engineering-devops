@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script that generate the ssh key for my server
+
+ssh-keygen -t rsa -b 4096 -p betty -f school
