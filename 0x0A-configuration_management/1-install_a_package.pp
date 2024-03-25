@@ -1,4 +1,3 @@
-#!/usr/bin/puppet
 #script that install flask from pip3
 
 package { 'flask':
