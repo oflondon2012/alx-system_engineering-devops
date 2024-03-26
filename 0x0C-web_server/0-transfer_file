@@ -17,10 +17,10 @@ ssh_path=$4
 # disabbling Strict Host Key
 scp -o "StrictHostKeyChecking no" -i "$ssh_path" "$file_path" "$username@$ipadd:~/"
 
-# Checking if the transfer was successful
+# Check transfer status
 if [ $? -eq 0 ]
 then
-	  echo "FILE TRANSFER WAS SUCCESSFULL"
+	  echo "FILE TRANSFER SUCCESSFULL"
   else
 	    echo "FILE TRANSFER FAILED"
 fi
