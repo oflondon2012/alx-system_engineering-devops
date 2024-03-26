@@ -6,16 +6,16 @@ then
 	    exit 1
 fi
 
-# Assigning Arguments to variables
+#declaring argument variable
 
-path_to_file=$1
-ip=$2
+file_path=$1
+ipadd=$2
 username=$3
-path_to_ssh_key=$4
+ssh_path=$4
 
 
-# Disabbling Strict Host Key checking
-scp -o "StrictHostKeyChecking no" -i "$path_to_ssh_key" "$path_to_file" "$username@$ip:~/"
+# disabbling Strict Host Key
+scp -o "StrictHostKeyChecking no" -i "$ssh_path" "$file_path" "$username@$ipadd:~/"
 
 # Checking if the transfer was successful
 if [ $? -eq 0 ]
