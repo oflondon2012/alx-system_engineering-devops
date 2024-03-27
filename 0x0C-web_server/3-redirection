@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# script that configures a new Ubuntu machine to Perform a 301-redirection
+
+# Upadating Packages before Installations
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Performing a 301 Redirection
+new_str="server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com\/channel\/UCXKOaa6_MaCEBaCkfYn8fWg permanent;"
+sudo sed -i "s/server_name _;/$new_str/" /etc/nginx/sites-enabled/default
+
+# Restarting Nginx service
+sudo service nginx restart
