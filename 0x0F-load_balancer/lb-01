@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# server-01 login details
+
+eval $("ssh-agent")
+
+ssh-add ~/0-RSA_public_key
+
+ssh ubuntu@3.94.213.200
