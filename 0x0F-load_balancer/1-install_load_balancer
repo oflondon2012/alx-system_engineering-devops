@@ -2,7 +2,7 @@
 # Create a scrit that install and configure HAproxy on your lb-01 server
 # After which the scrit also send trafic to server web-01 and web-02
 # Then distribute the request using roundrobing algorithm
-#
+# Also allow the scrit to start by init scrit
 
 # First update and install HAProxy
 sudo apt-get -y update
