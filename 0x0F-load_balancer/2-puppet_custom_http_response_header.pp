@@ -2,12 +2,12 @@
 
 # Get the server update
 exec { 'update_server':
-    command => '/usr/bin/apt-get -y update',
+  command => '/usr/bin/apt-get -y update',
 }
 
 #install nginx now
 package { 'ngix':
-   ensure => 'installed',
+  ensure => 'installed',
 }
 
 # ensure the service is running
@@ -24,7 +24,7 @@ file_world { '/var/www/html/index.html' :
 
 # customise response header for nginx
 
-file { 'Nginx header':
+file { 'nginx_header':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
   line   => "\tadd_header X-Served-By ${hostname};",
