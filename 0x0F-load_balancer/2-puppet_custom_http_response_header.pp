@@ -8,10 +8,11 @@ exec { 'update':
 # install nginx now
 package { 'nginx':
   ensure   => present,
+  provider => 'apt'
 }
 ->
 # customise response header for nginx
-file_response { 'response header':
+file_line { 'res_header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
