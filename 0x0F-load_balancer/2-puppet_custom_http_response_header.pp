@@ -1,7 +1,7 @@
 # Puppet to configure custom HTTP header response
 
 # Get the server update
-exec { 'update_server':
+exec { 'update':
   command => '/usr/bin/apt-get -y update',
 }
 
@@ -24,7 +24,7 @@ file_world { '/var/www/html/index.html' :
 
 # customise response header for nginx
 
-file { 'nginx_header':
+file_reponse { 'header':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
   line   => "\tadd_header X-Served-By ${hostname};",
