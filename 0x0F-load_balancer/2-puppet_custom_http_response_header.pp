@@ -5,21 +5,20 @@ exec { 'update':
   command => '/usr/bin/apt-get -y update',
 }
 ->
-# install nginx web server on server
+# install nginx now
 package { 'nginx':
   ensure   => present,
-  provider => 'apt'
 }
 ->
-# custom Nginx response header (X-Served-By: hostname)
-file_line { 'add HTTP header':
+# customise response header for nginx
+file_response { 'response header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
   line   => 'add_header X-Served-By $hostname;'
 }
 ->
-# start service
+# ensure the service is running
 service { 'nginx':
 ensure  => 'running',
 enable  => true,
