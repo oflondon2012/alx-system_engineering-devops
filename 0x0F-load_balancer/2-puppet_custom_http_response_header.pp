@@ -12,7 +12,7 @@ package { 'nginx':
 }
 ->
 # customise response header for nginx
-file_line { 'res_header':
+file_custom { 'res_header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
