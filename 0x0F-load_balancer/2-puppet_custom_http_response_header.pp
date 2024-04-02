@@ -1,11 +1,8 @@
-# Puppet to configure custom HTTP header respon
-# Custom HTTP header in a nginx server
+# Puppet to configure custom HTTP header response
 #
 # update ubuntu server
-exec { 'update server':
-  command  => 'apt-get update',
-  user     => 'root',
-  provider => 'shell',
+exec { 'update':
+  command => '/usr/bin/apt-get -y update',
 }
 ->
 # install nginx web server on server
