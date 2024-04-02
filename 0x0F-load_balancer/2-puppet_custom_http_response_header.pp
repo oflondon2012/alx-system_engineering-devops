@@ -1,33 +1,30 @@
-# Puppet to configure custom HTTP header response
-
-# Get the server update
-exec { 'update':
-  command => '/usr/bin/apt-get -y update',
+# Puppet to configure custom HTTP header respon
+# Custom HTTP header in a nginx server
+#
+# update ubuntu server
+exec { 'update server':
+  command  => 'apt-get update',
+  user     => 'root',
+  provider => 'shell',
 }
-
-#install nginx now
-package { 'ngix':
-  ensure => 'installed',
+->
+# install nginx web server on server
+package { 'nginx':
+  ensure   => present,
+  provider => 'apt'
 }
-
-# ensure the service is running
-service { 'nginx':
-  ensure => 'running',
-  enable => 'true',
-  require => Package['nginx'],
-}
-
-# create hellow world in the server root
-file_world { '/var/www/html/index.html' :
-  content => 'Hello World!',
-}
-
-# customise response header for nginx
-
-file_reponse { 'header':
-  ensure => present,
+->
+# custom Nginx response header (X-Served-By: hostname)
+file_line { 'add HTTP header':
+  ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
-  line   => "\tadd_header X-Served-By ${hostname};",
-  after  => 'server_name _;',
-  require => Service['nginx'],
+  after  => 'listen 80 default_server;',
+  line   => 'add_header X-Served-By $hostname;'
+}
+->
+# start service
+service { 'nginx':
+ensure  => 'running',
+enable  => true,
+require => Package['nginx']
 }
