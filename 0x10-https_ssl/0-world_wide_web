@@ -1,19 +1,34 @@
 #!/usr/bin/env bash
 # scrit that display information about subdomains.
 
-domain_information() {
-    local domain="$1"
-    local subdomain="$2"
-    local line
-    line=$(dig "$subdomain"."$domain" | awk '/ANSWER SECTION:/ {getline; print; getline; print}')
-    echo "$subdomain $line" | awk '{printf "The subdomain %s is a %s record and points to %s\n", $1, $2, $3}'
-}
+print_dns_info() {
+	local SUB_DOMAIN="$1"
+	local RECORD_TYPE="$2"
+	local DESTINATION="$3"
 
-if [ "$#" -eq 1 ]; then
-    domain_information "$1" "www"
-    domain_information "$1" "lb-01"
-    domain_information "$1" "web-01"
-    domain_information "$1" "web-02"
-elif [ "$#" -eq 2 ]; then
-    domain_information "$1" "$2"
+	echo "The subdomain $SUB_DOMAIN is a $RECORD_TYPE record and points to $DESTINATION"
+}
+dig_domain() {
+	local SUB_DOMAIN="$1"
+	local DOMAIN="$2"
+
+	dig_ouput=$(dig "$SUB_DOMAIN.$DOMAIN" | grep -A1 "ANSWER SECTION" | tail -n 1)
+	record=$(echo "$dig_ouput" | awk '{print $4}')
+	ip=$(echo "$dig_ouput" | awk '{print $5}')
+	print_dns_info "$SUB_DOMAIN" "$record" "$ip"
+}
+my_array=("www" "lb-01" "web-01" "web-02")
+if [ $# -lt 1 ]; then
+	exit 1
+fi
+
+domain="$1"
+subdomain="$2"
+
+if [ -z "$subdomain" ]; then
+	for element in "${my_array[@]}"; do
+		dig_domain "$element" "$domain"
+	done
+else
+	dig_domain "$subdomain" "$domain"
 fi
