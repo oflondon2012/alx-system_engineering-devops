@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# create a symbolic link of nginx site available to nginx site enable
+
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+#restart the nginx service to save the changes
+sudo service nginx restart
