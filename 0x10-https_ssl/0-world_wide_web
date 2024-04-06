@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
 # scrit that display information about subdomains.
 
-#!/usr/bin/env bash
-# scrit that display information about subdomains.
-
 display_infor() {
-	#local domain="$1"
-	#local subdomain="$2"
-	#local dinfo
 	dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
-	#dinfo=$(dig "$subdomain"."$domain" | awk '/ANSWER SECTION:/ {getline; print; getline; print}')
-	#echo "$subdomain $dinfo" | awk '{printf "The subdomain %s is a %s record and points to %s\n", $1, $2, $3}'
 }
 
 if [ "$#" -eq 1 ]; then
 	display_infor "www.$1" "www"
-	display_infor "$1" "lb-01"
-	display_infor "$1" "web-01"
-	display_infor "$1" "web-02"
+	display_infor "lb-01.$1" "lb-01"
+	display_infor "web-01.$1" "web-01"
+	display_infor "web-02.$1" "web-02"
 elif [ "$#" -eq 2 ]; then
-	display_infor "$1" "$2"
+	display_infor "$2.$1" "$2"
 fi
