@@ -1,0 +1,32 @@
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+    #ssl files
+    ca-base /etc/ssl/certs
+    crt-base /etc/ssl/private
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+frontend http-in
+    bind *:80
+    bind *:443 ssl crt /etc/haproxy/certs/www.oflondon.tech.pem
+    redirect scheme https code 301 if !{ ssl_fc }
+    default_backend servers
+
+backend servers
+    balance roundrobin
+    server server1 54.227.222.216:80 check
+    server server2 100.26.152.71:80 check
