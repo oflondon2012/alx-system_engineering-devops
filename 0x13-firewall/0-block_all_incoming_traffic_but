@@ -1,7 +1,3 @@
-#udate the software
-sudo apt-get update
-# let install ufw if not install yet
-sudo apt-get install -y ufw
 # know the status of ufw
 sudo ufw status
 # Since the ufw is not running enable it
