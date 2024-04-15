@@ -3,7 +3,7 @@ sudo ufw status
 # Since the ufw is not running enable it
 sudo ufw enable
 # Deny incoming 
-sudo ufw default deny incomming
+sudo ufw default deny incoming
 # Allow outgoing
 sudo ufw default allow outgoing
 # Allow ports 22, 443, and 80
