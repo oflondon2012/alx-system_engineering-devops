@@ -1,36 +1,20 @@
 #udate the software
-
 sudo apt-get update
-
 # let install ufw if not install yet
-
 sudo apt-get install -y ufw
-
 # know the status of ufw
-
 sudo ufw status
-
 # Since the ufw is not running enable it
-
 sudo ufw enable
-
 # Deny incoming 
-
 sudo ufw default deny incomming
-
 # Allow outgoing
-
 sudo ufw default allow outgoing
-
 # Allow ports 22, 443, and 80
-
 sudo ufw allow 22/tcp
 sudo ufw allow 443/tcp
 sudo ufw allow 80/tcp
-
 # let know if the rules are ok
-
 sudo ufw show added
-
 # let enable ufw 
 sudo ufw enable
