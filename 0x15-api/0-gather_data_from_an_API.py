@@ -37,8 +37,8 @@ def print_task_progress(employee_name, total_tasks, completed_tasks):
     """Prints the progress of the employee's TODO list."""
     print("Employee {} is done with tasks ({}/{}):"
           .format(employee_name, len(completed_tasks), total_tasks))
-    for task in total_completed:
-        print(f"\t{task['title']}")
+    for task in completed_tasks:
+        print("\t{}".format(task['title']))
 
 
 if __name__ == "__main__":
@@ -49,5 +49,5 @@ if __name__ == "__main__":
     employee_id = sys.argv[1]
     todo_list, employee_name = get_employee_data(employee_id)
     total_tasks = len(todo_list)
-    total_completed = count_completed_tasks(todo_list)
-    print_task_progress(employee_name, total_tasks, total_completed)
+    completed_tasks = count_completed_tasks(todo_list)
+    print_task_progress(employee_name, total_tasks, completed_tasks)
