@@ -2,11 +2,10 @@
 """
 Using first task extend your Python script to export data in the CSV format
 """
-
+import csv
 import json
 import requests
 import sys
-import csv
 
 
 def get_employee_data(employee_id):
