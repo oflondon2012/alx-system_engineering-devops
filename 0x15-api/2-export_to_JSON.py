@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module Docs
+ extend your Python script to export data in the JSON format.
 """
 import json
 import requests
