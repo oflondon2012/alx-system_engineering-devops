@@ -8,36 +8,33 @@ import requests
 import sys
 
 
-def get_employee_data(employee_id):
+def get_employee_data(user_id):
     """Fetches TODO list data and employee name from the API."""
-    base_url = 'https://jsonplaceholder.typicode.com/users/{}'
-    todos_url = base_url + '/todos'
-    name_url = base_url.format(employee_id)
-
-    # Get TODO list and employee name
-    with requests.Session() as session:
-        todo_res = session.get(todos_url.format(employee_id))
-        name_res = session.get(name_url)
+    #base_url = 'https://jsonplaceholder.typicode.com/users/{}'
+    #todos_url = base_url + '/todos'
+    user_response = requests.get(f"https://jsonplaceholder.typicode.com/users/{user_id}")
+    todos_response = requests.get(f"https://jsonplaceholder.typicode.com/todos?userId={user_id}")
 
     # Check if requests were successful
-    if todo_res.status_code != 200 or name_res.status_code != 200:
+    if user_response.status_code != 200 or todos_response.status_code != 200:
         print("Failed to fetch data from API")
         sys.exit(1)
 
-    username = name_res.json()['name']
+    user_data = user_response.json()
+    todos_data = todos_response.json()
 
-    return todo_res.json(), username
+    return todos_data, user_data['username']
 
 
-def export_to_csv(todo_list, employee_id, username):
+def export_to_csv(todo_list, user_id, username):
     """Exports TODO list data to a CSV file."""
-    filename = f"{employee_id}.csv"
+    filename = f"{user_id}.csv"
 
     with open(filename, "w", newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
         for task in todo_list:
             writer.writerow([
-                employee_id,
+                user_id,
                 username,
                 task.get('completed'),
                 task.get('title')
@@ -49,6 +46,6 @@ if __name__ == "__main__":
         print("Usage: python script.py <employee_id>")
         sys.exit(1)
 
-    employee_id = sys.argv[1]
-    todo_list, username = get_employee_data(employee_id)
-    export_to_csv(todo_list, employee_id, username)
+    user_id = sys.argv[1]
+    todo_list, username = get_employee_data(user_id)
+    export_to_csv(todo_list, user_id, username)
