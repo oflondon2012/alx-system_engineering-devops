@@ -29,7 +29,7 @@ def fetch_todo_data():
                     "task": task.get('title'),
                     "completed": task.get('completed')
                 }
-            tasks.append(task_dict)
+                tasks.append(task_dict)
         todos[user.get('id')] = tasks
 
     return todos
