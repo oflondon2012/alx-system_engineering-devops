@@ -23,8 +23,9 @@ def get_employee_data(employee_id):
     if todo_res.status_code != 200 or name_res.status_code != 200:
         print("Failed to fetch data from API")
         sys.exit(1)
+    employee_name = name_res.json().get('name')
 
-    return todo_res.json(), name_res.json()['name']
+    return todo_res.json(), employee_name
 
 
 def count_completed_tasks(todo_list):
