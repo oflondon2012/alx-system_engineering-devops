@@ -43,6 +43,7 @@ def save_user_tasks(user_id):
     with open(file_name, mode="w") as user_file:
         json.dump(user_data, user_file)
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python module.py <user_id>")
@@ -50,4 +51,3 @@ if __name__ == "__main__":
 
     user_id = sys.argv[1]
     save_user_tasks(user_id)
-
