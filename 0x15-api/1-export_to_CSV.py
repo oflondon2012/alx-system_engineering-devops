@@ -10,10 +10,9 @@ import sys
 
 def get_employee_data(user_id):
     """Fetches TODO list data and employee name from the API."""
-    #base_url = 'https://jsonplaceholder.typicode.com/users/{}'
-    #todos_url = base_url + '/todos'
-    user_response = requests.get(f"https://jsonplaceholder.typicode.com/users/{user_id}")
-    todos_response = requests.get(f"https://jsonplaceholder.typicode.com/todos?userId={user_id}")
+    base_url = 'https://jsonplaceholder.typicode.com'
+    user_response = requests.get(f"{base_url}/users/{user_id}")
+    todos_response = requests.get(f"{base_url}/todos?userId={user_id}")
 
     # Check if requests were successful
     if user_response.status_code != 200 or todos_response.status_code != 200:
