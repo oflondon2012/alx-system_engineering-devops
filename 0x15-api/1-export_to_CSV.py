@@ -24,7 +24,9 @@ def get_employee_data(employee_id):
         print("Failed to fetch data from API")
         sys.exit(1)
 
-    return todo_res.json(), name_res.json()['name']
+    username = name_res.json()['name']
+
+    return todo_res.json(), username
 
 
 def export_to_csv(todo_list, employee_id, username):
