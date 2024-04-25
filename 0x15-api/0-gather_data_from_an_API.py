@@ -23,23 +23,18 @@ def get_employee_data(employee_id):
     if todo_res.status_code != 200 or name_res.status_code != 200:
         print("Failed to fetch data from API")
         sys.exit(1)
-    employee_name = name_res.json().get('name')
 
-    return todo_res.json(), employee_name
-
-
-def count_completed_tasks(todo_list):
-    """Counts the number of completed tasks in the TODO list."""
-    completed_tasks = [task for task in todo_list if task['completed']]
-    return completed_tasks
+    return todo_res.json(), name_res.json()['name']
 
 
-def print_task_progress(employee_name, total_tasks, completed_tasks):
+def print_task_progress(username, todo_list):
     """Prints the progress of the employee's TODO list."""
-    print("Employee {} is done with tasks({}/{}):"
-          .format(employee_name, len(completed_tasks), total_tasks))
-    for task in completed_tasks:
-        print('\t {}'.format(task['title']))
+    print("Employee {} is done with tasks({}/{}):".format(
+        username,
+        sum(task['completed'] for task in todo_list), len(todo_list)))
+    for task in todo_list:
+        if task['completed']:
+            print('\t {}'.format(task['title']))
 
 
 if __name__ == "__main__":
@@ -48,7 +43,5 @@ if __name__ == "__main__":
         sys.exit(1)
 
     employee_id = sys.argv[1]
-    todo_list, employee_name = get_employee_data(employee_id)
-    total_tasks = len(todo_list)
-    completed_tasks = count_completed_tasks(todo_list)
-    print_task_progress(employee_name, total_tasks, completed_tasks)
+    todo_list, username = get_employee_data(employee_id)
+    print_task_progress(username, todo_list)
