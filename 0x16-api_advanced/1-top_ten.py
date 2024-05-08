@@ -11,13 +11,13 @@ def top_ten(subreddit):
     return top 10
     """
     url = 'https://www.reddit.com'
-    headers = {
+    header = {
         'Accept': 'application/json',
-        'User-Agent': 'Mozilla/5.0'
+        'User-Agent': 'Mozilla/5.0 Chrome/58.0.3029.110 Safari/537.3'
     }
-    response = requests.get('{}/r/{}/hot/.json?sort={}&limit={}'.format(
+    response = requests.get('{}/r/{}/.json?sort={}&limit={}'.format(
         url, subreddit, 'top', 10),
-        headers=headers,
+        headers=header,
         allow_redirects=False)
     if response.status_code == 200:
         for post in response.json()['data']['children'][0:10]:
