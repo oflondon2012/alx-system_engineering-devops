@@ -15,7 +15,7 @@ def top_ten(subreddit):
         'Accept': 'application/json',
         'User-Agent': 'Mozilla/5.0'
     }
-    response = requests.get('{}/r/{}/.json?sort={}&limit={}'.format(
+    response = requests.get('{}/r/{}/hot/.json?sort={}&limit={}'.format(
         url, subreddit, 'top', 10),
         headers=headers,
         allow_redirects=False)
@@ -24,7 +24,3 @@ def top_ten(subreddit):
             print(post['data']['title'])
     else:
         print(None)
-
-
-if __name__ == "__main__":
-    top_ten(argv[1])
