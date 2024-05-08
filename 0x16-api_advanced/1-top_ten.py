@@ -10,17 +10,18 @@ def top_ten(subreddit):
     """
     return top 10
     """
-    url = 'https://www.reddit.com/r/{}/hot/.json?limit=10'
-    header = {
+    url = 'https://www.reddit.com'
+    headers = {
         'Accept': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+        'User-Agent': 'Mozilla/5.0'
     }
-    response = requests.get(url, headers=header, allow_redirects=False)
+    response = requests.get('{}/r/{}/.json?sort={}&limit={}'.format(
+        url, subreddit, 'top', 10),
+        headers=headers,
+        allow_redirects=False)
     if response.status_code == 200:
-        data = response.json()
-        if 'data' in data and 'children' in data['data']:
-            for post in data['data']['children']:
-                print(post['data']['title'])
+        for post in response.json()['data']['children'][0:10]:
+            print(post['data']['title'])
     else:
         print(None)
 
