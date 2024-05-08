@@ -10,7 +10,7 @@ def top_ten(subreddit):
     """
     return top 10
     """
-    url = 'https://www.reddit.com/r/{subreddit}/hot.json?limit=10'
+    url = 'https://www.reddit.com/r/{}/hot/.json?limit=10'
     header = {
         'Accept': 'application/json',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
